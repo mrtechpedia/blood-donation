@@ -1,0 +1,63 @@
+.me-auto {
+  margin: auto;
+  padding: 10px;
+  margin-top: 0%;
+}
+.nav {
+  /* margin: 30px; */
+  margin-top: 0%;
+  margin-bottom: 0%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 6px 10px -1px rgba(0, 0, 0, 0.2);
+}
+.image {
+  /* margin: 30px; */
+  margin-top: 0%;
+}
+
+.bloodyimg {
+  width: 100vw;
+  height: 85vh;
+}
+
+.all-browsers {
+  margin: 0;
+  padding: 5px;
+  background-color: lightgray;
+}
+
+.all-browsers > h1,
+.browser {
+  margin: 10px;
+  padding: 5px;
+}
+
+.browser {
+  background: white;
+}
+
+.browser > h2,
+p {
+  margin: 4px;
+  font-size: 90%;
+}
+
+footer {
+  text-align: center;
+  padding: 3px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .bloodyimg {
+    width: 200%;
+    margin-left: -500px;
+  }
+}

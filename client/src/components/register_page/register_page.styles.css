@@ -1,0 +1,51 @@
+.register_form {
+  width: 50%;
+  margin: auto;
+  /* height: 100vh; */
+  background-color: white;
+  opacity: 80%;
+  padding: 40px;
+  padding-top: 20px;
+  margin-top: 4%;
+  /* margin-bottom: 0%; */
+  font-size: 14px;
+}
+
+.head {
+  text-align: center;
+}
+body {
+  overflow-x: hidden;
+}
+.registerbody {
+  background-image: url("../../assets/3.jpg");
+  background-size: 100% contain;
+  height: 100vh;
+  width: 100vw;
+  /* opacity: 80%; */
+  font-family: "Montserrat", sans-serif;
+  overflow-x: hidden;
+  /* margin-bottom: 5%; */
+}
+.dropdowns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dates {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit_button {
+  text-align: center;
+  width: 50%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .register_form {
+    width: 80%;
+  }
+}
