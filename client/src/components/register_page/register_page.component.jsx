@@ -9,14 +9,19 @@ import {
   TextField,
   Button,
 } from "@mui/material";
+import { Navbar, Nav, Container } from "react-bootstrap";
+import icon from "../../assets/icon.png";
 import "./register_page.styles.css";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     username: "",
     email: "",
     mobile: "",
     address: "",
+    city: "",
     college: "",
     designation: "",
     chronicDisease: "",
@@ -92,6 +97,7 @@ function Register() {
         username: input.username,
         mobile: input.mobile,
         address: input.address,
+        city: input.city,
         college: input.college,
         designation: input.designation,
         chronicDisease: input.chronicDisease,
@@ -101,11 +107,33 @@ function Register() {
       };
       const res = await axios.post("/api/register", newDonor);
       alert(res.data.msg);
+      navigate("/");
     }
   }
 
   return (
     <div className="registerbody">
+      <Navbar expand="lg" className="nav">
+        <Container>
+          <Navbar.Brand href="/" className="navtxt">
+            <img src={icon} className="icon"></img>
+            Donate Blood
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/register" className="navtxt">
+                Register now
+              </Nav.Link>
+              <Nav.Link href=""></Nav.Link>
+              <Nav.Link href=""></Nav.Link>
+              <Nav.Link href="/emergency" className="navtxt">
+                Emergency
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
       <div className="register_form">
         <Form onSubmit={handleSubmit} className="mt-4">
           <h1 className="head">REGISTER</h1>
@@ -113,23 +141,54 @@ function Register() {
           <br></br>
           <Form.Group className="mb-3">
             <Form.Label>Username</Form.Label>
-            <Form.Control type="text" name="username" onChange={handleChange} />
+            <Form.Control
+              required
+              type="text"
+              name="username"
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" name="email" onChange={handleChange} />
+            <Form.Control
+              required
+              type="email"
+              name="email"
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Mobile</Form.Label>
-            <Form.Control type="number" name="mobile" onChange={handleChange} />
+            <Form.Control
+              type="text"
+              required
+              name="mobile"
+              maxlength="10"
+              pattern="\d{10}"
+              title="Please enter exactly 10 digits"
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group className="mb-4">
             <Form.Label>Address</Form.Label>
-            <Form.Control type="text" name="address" onChange={handleChange} />
+            <Form.Control
+              required
+              type="text"
+              name="address"
+              onChange={handleChange}
+            />
           </Form.Group>
-
           <Form.Group className="mb-4">
-            <FormControl fullWidth>
+            <Form.Label>City</Form.Label>
+            <Form.Control
+              type="text"
+              required
+              name="city"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-4">
+            <FormControl required fullWidth>
               <InputLabel id="demo-simple-select-label">College</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -155,7 +214,7 @@ function Register() {
           </Form.Group>
 
           <Form.Group className="mb-4">
-            <FormControl fullWidth>
+            <FormControl required fullWidth>
               <InputLabel id="demo-simple-select-label">Designation</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -171,7 +230,7 @@ function Register() {
           </Form.Group>
 
           <Form.Group className="mb-4">
-            <FormControl fullWidth>
+            <FormControl required fullWidth>
               <InputLabel id="demo-simple-select-label">
                 Chronic Disease
               </InputLabel>
@@ -190,7 +249,7 @@ function Register() {
           </Form.Group>
 
           <Form.Group className="mb-4">
-            <FormControl fullWidth>
+            <FormControl required fullWidth>
               <InputLabel id="demo-simple-select-label">Blood Group</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -216,6 +275,7 @@ function Register() {
               label="Date of birth"
               type="date"
               name="dob"
+              required
               defaultValue=""
               fullWidth
               InputLabelProps={{
@@ -227,6 +287,7 @@ function Register() {
           <Form.Group className="mb-4">
             <TextField
               label="Last donated on"
+              required
               type="date"
               name="ldo"
               defaultValue=""

@@ -6,6 +6,7 @@ const donorSchema = new Schema({
   mobile: Number,
   email: String,
   address: String,
+  city: String,
   designation: String,
   ldo: Date,
   dob: Date,

@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const keys = require("./config/keys");
 require("./models/Donor");
 require("./models/Receiver");
+require("./models/ReceiverDummy");
 
 const app = express();
 const cors = require("cors");

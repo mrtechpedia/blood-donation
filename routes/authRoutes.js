@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const keys = require("../config/keys");
 const e = require("express");
-// const bcrypt = require("bcrypt");
-// const saltRounds = 10;
 
 const Donor = mongoose.model("donors");
 
@@ -19,6 +17,7 @@ module.exports = (app) => {
       mobile: req.body.mobile,
       email: req.body.email,
       address: req.body.address,
+      city: req.body.city,
       college: req.body.college,
       chronicDisease: req.body.chronicDisease,
       ldo: req.body.ldo,

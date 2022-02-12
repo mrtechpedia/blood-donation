@@ -14,14 +14,17 @@ import {
   Checkbox,
 } from "@mui/material";
 import moment from "moment";
+import { Navbar, Nav, Container } from "react-bootstrap";
+import icon from "../../assets/icon.png";
 
 import "./admin_page.styles.css";
 
 function Admin() {
   const [bloodGroup, setBloodGroup] = useState("");
+  const [citySearch, setCitySearch] = useState("");
   const [count, setCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
-  // const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState([]);
   const [data, setData] = useState([]);
   const [checked, setChecked] = useState(false);
 
@@ -29,10 +32,23 @@ function Admin() {
     setBloodGroup(e.target.value);
   };
 
-  // useEffect(async () => {
-  //   const res = await axios.get("/api/city");
-  //   setCities(res.data.city);
-  // }, []);
+  const handleCity = (e) => {
+    setCitySearch(e.target.value);
+  };
+
+  useEffect(async () => {
+    const result = await axios.get("/api/city");
+    let donorWithCities = [];
+    let cities = [];
+    donorWithCities = result.data.donors.filter((donor) => donor.city);
+    donorWithCities.map((donor) => {
+      if (!cities.includes(donor.city)) {
+        cities.push(donor.city);
+      }
+    });
+    cities.sort();
+    setCities(cities);
+  }, []);
 
   useEffect(async () => {
     const res = await axios.get("/api/notification");
@@ -43,11 +59,23 @@ function Admin() {
   }, [count]);
 
   const findDonors = async () => {
-    const res = await axios.post("/api/admin", { bloodGroup });
-    if (res.data.donors === null) {
-      alert(res.data.msg);
+    let res;
+    if (bloodGroup != "" && citySearch != "") {
+      res = await axios.post("/api/admin", { bloodGroup, citySearch });
+    } else if (bloodGroup != "") {
+      res = await axios.post("/api/admin", { bloodGroup });
+    } else if (citySearch != "") {
+      res = await axios.post("/api/admin", { citySearch });
     } else {
-      setData(res.data.donors);
+      alert("Please select any one of the search methods!!");
+    }
+
+    if (res != null) {
+      if (res.data.donors === null) {
+        alert(res.data.msg);
+      } else {
+        setData(res.data.donors);
+      }
     }
   };
 
@@ -65,7 +93,27 @@ function Admin() {
 
   return (
     <div className="admin_page">
-      <br></br>
+      <Navbar expand="lg" className="nav">
+        <Container>
+          <Navbar.Brand href="/" className="navtxt">
+            <img src={icon} className="icon"></img>
+            Donate Blood
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/register" className="navtxt">
+                Register now
+              </Nav.Link>
+              <Nav.Link href=""></Nav.Link>
+              <Nav.Link href=""></Nav.Link>
+              <Nav.Link href="/emergency" className="navtxt">
+                Emergency
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
       <div className="blood_search">
         <FormControl className="blood_dropdown">
           <InputLabel id="demo-simple-select-label">
@@ -78,6 +126,7 @@ function Admin() {
             onChange={handleSelect}
             name="bloodGroup"
           >
+            <MenuItem value=""></MenuItem>
             <MenuItem value="A+">A+ </MenuItem>
             <MenuItem value="B+">B+ </MenuItem>
             <MenuItem value="O+">O+ </MenuItem>
@@ -86,6 +135,21 @@ function Admin() {
             <MenuItem value="B-">B- </MenuItem>
             <MenuItem value="AB-">AB-</MenuItem>
             <MenuItem value="O-">O- </MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl className="city_dropdown">
+          <InputLabel id="demo-simple-select-label">Choose city</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="City"
+            onChange={handleCity}
+            name="citi"
+          >
+            <MenuItem value=""></MenuItem>
+            {cities.map((city) => {
+              return <MenuItem value={city}>{city}</MenuItem>;
+            })}
           </Select>
         </FormControl>
         <div className="search_button " onClick={findDonors}>
@@ -139,6 +203,7 @@ function Admin() {
               <TableCell>Email</TableCell>
               <TableCell>Designation</TableCell>
               <TableCell>Address</TableCell>
+              <TableCell>City</TableCell>
               <TableCell>College</TableCell>
               <TableCell>Chronic Disease</TableCell>
               <TableCell>Blood Group</TableCell>
@@ -154,6 +219,7 @@ function Admin() {
                 <TableCell>{item.email} </TableCell>
                 <TableCell>{item.designation} </TableCell>
                 <TableCell>{item.address}</TableCell>
+                <TableCell>{item.city}</TableCell>
                 <TableCell>{item.college}</TableCell>
                 <TableCell>{item.chronicDisease}</TableCell>
                 <TableCell>{item.bloodGroup} </TableCell>

@@ -1,7 +1,7 @@
 import React from "react";
 import "./home.styles.css";
-import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
-import bloody from "../../assets/bloody2.png";
+import { Navbar, Nav, Container } from "react-bootstrap";
+import bloody from "../../assets/bloody.webp";
 import icon from "../../assets/icon.png";
 
 function Home() {
@@ -9,7 +9,7 @@ function Home() {
     <div>
       <Navbar expand="lg" className="nav">
         <Container>
-          <Navbar.Brand href="#home" className="navtxt">
+          <Navbar.Brand href="/" className="navtxt">
             <img src={icon} className="icon"></img>
             Donate Blood
           </Navbar.Brand>
@@ -17,7 +17,7 @@ function Home() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/register" className="navtxt">
-                Register yourself
+                Register now
               </Nav.Link>
               <Nav.Link href=""></Nav.Link>
               <Nav.Link href=""></Nav.Link>
@@ -35,7 +35,7 @@ function Home() {
 
       <footer>
         <p>
-          Website made for blood donation.
+          A blood donation website
           <br></br>
           <a href="">abc@example.com</a>
         </p>

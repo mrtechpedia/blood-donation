@@ -6,17 +6,31 @@ const Receiver = mongoose.model("receivers");
 
 module.exports = (app) => {
   app.post("/api/admin", async (req, res, done) => {
-    const foundDonors = await Donor.find({ bloodGroup: req.body.bloodGroup });
+    let foundDonors = {};
+
+    if (req.body.bloodGroup && req.body.citySearch) {
+      foundDonors = await Donor.find({
+        bloodGroup: req.body.bloodGroup,
+        city: req.body.citySearch,
+      });
+    } else if (req.body.bloodGroup) {
+      foundDonors = await Donor.find({
+        bloodGroup: req.body.bloodGroup,
+      });
+    } else if (req.body.citySearch) {
+      foundDonors = await Donor.find({
+        city: req.body.citySearch,
+      });
+    }
 
     if (foundDonors.length != 0) {
       return res.json({
-        msg: "Donors found with " + req.body.bloodGroup + "are...",
         donors: foundDonors,
       });
     }
 
     return res.json({
-      msg: "No donors found with " + req.body.bloodGroup + " blood group",
+      msg: "No donors found!!",
       donors: null,
     });
   });
@@ -37,21 +51,12 @@ module.exports = (app) => {
     });
   });
 
-  // app.get("/api/city", async (req, res, done) => {
-  //   const foundDonors = await Donor.find();
-
-  //   if (foundDonors.length != 0) {
-  //     return res.json({
-  //       msg: "Cities found are...",
-  //       city: foundDonors.city,
-  //     });
-  //   }
-
-  //   return res.json({
-  //     msg: "No new notifications...",
-  //     notification: null,
-  //   });
-  // });
+  app.get("/api/city", async (req, res, done) => {
+    const foundDonors = await Donor.find();
+    return res.json({
+      donors: foundDonors,
+    });
+  });
 
   app.post("/api/delete", async (req, res) => {
     const id = req.body.idNo;
