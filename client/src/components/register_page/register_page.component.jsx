@@ -41,7 +41,6 @@ function Register() {
   const [dob, setDob] = useState(new Date());
 
   const handleDOB = (event) => {
-    // moment(event.target.value).format("DD/MM/YY")
     const dateOfBirth = new Date(event.target.value);
 
     //calculate month difference from current date in time
@@ -123,7 +122,7 @@ function Register() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/register" className="navtxt">
-                Register now
+                Register Now
               </Nav.Link>
               <Nav.Link href=""></Nav.Link>
               <Nav.Link href=""></Nav.Link>
@@ -204,10 +203,13 @@ function Register() {
                   Baba Farid College of Management and Technology
                 </MenuItem>
                 <MenuItem value="Baba Farid College of Education">
-                  Baba Farid College of Enterpreneurship
+                  Baba Farid College of Education
                 </MenuItem>
                 <MenuItem value="Baba Farid College">
                   Baba Farid College
+                </MenuItem>
+                <MenuItem value="Baba Farid Senior Secondary School">
+                  Baba Farid Senior Secondary School
                 </MenuItem>
               </Select>
             </FormControl>
@@ -232,7 +234,7 @@ function Register() {
           <Form.Group className="mb-4">
             <FormControl required fullWidth>
               <InputLabel id="demo-simple-select-label">
-                Chronic Disease
+                Any Disease?
               </InputLabel>
               <Select
                 labelId="demo-simple-select-label"

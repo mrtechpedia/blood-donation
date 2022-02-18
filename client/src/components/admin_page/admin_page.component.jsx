@@ -103,7 +103,7 @@ function Admin() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/register" className="navtxt">
-                Register now
+                Register Now
               </Nav.Link>
               <Nav.Link href=""></Nav.Link>
               <Nav.Link href=""></Nav.Link>
