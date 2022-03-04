@@ -65,31 +65,27 @@ function Register() {
   const [ldo, setLdo] = useState(new Date());
 
   const handleLDO = (event) => {
-    const lastDonatedOn = new Date(event.target.value);
+    // const lastDonatedOn = new Date(event.target.value);
 
-    // To calculate the time difference of two dates
-    const Difference_In_Time = new Date().getTime() - lastDonatedOn.getTime();
+    // // To calculate the time difference of two dates
+    // const Difference_In_Time = new Date().getTime() - lastDonatedOn.getTime();
 
-    // To calculate the no. of days between two dates
-    const Difference_In_Days = Math.trunc(
-      Difference_In_Time / (1000 * 3600 * 24)
-    );
+    // // To calculate the no. of days between two dates
+    // const Difference_In_Days = Math.trunc(
+    //   Difference_In_Time / (1000 * 3600 * 24)
+    // );
 
-    if (Difference_In_Days >= 90) {
-      setLdo(event.target.value);
-    } else {
-      setLdo(null);
-    }
+    // if (Difference_In_Days >= 90) {
+    setLdo(event.target.value);
+    // } else {
+    // setLdo(null);
+    // }
   };
 
   async function handleSubmit(event) {
     event.preventDefault();
     if (dob === null) {
       alert("You can't register as your age is less than 18!!");
-    } else if (ldo === null) {
-      alert(
-        "You can't register as you have donated your blood between 3 months from today"
-      );
     } else {
       const newDonor = {
         email: input.email,
@@ -211,6 +207,7 @@ function Register() {
                 <MenuItem value="Baba Farid Senior Secondary School">
                   Baba Farid Senior Secondary School
                 </MenuItem>
+                <MenuItem value="Other Department">Other Department</MenuItem>
               </Select>
             </FormControl>
           </Form.Group>
@@ -227,6 +224,7 @@ function Register() {
               >
                 <MenuItem value="Teacher">Teacher</MenuItem>
                 <MenuItem value="Student">Student</MenuItem>
+                <MenuItem value="Non-Teaching">Non-Teaching</MenuItem>
               </Select>
             </FormControl>
           </Form.Group>

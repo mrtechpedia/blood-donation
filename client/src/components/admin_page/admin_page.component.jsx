@@ -47,6 +47,9 @@ function Admin() {
       }
     });
     cities.sort();
+    let a = moment(result.data.donors[3].ldo);
+    let b = moment(new Date());
+    console.log(b.diff(a, "days"));
     setCities(cities);
   }, []);
 
@@ -205,7 +208,7 @@ function Admin() {
               <TableCell>Address</TableCell>
               <TableCell>City</TableCell>
               <TableCell>College</TableCell>
-              <TableCell>Chronic Disease</TableCell>
+              <TableCell>Any Disease</TableCell>
               <TableCell>Blood Group</TableCell>
               <TableCell>LDO</TableCell>
               <TableCell>DOB</TableCell>
@@ -214,7 +217,14 @@ function Admin() {
           </TableHead>
           <TableBody>
             {data.map((item) => (
-              <TableRow key={item._id}>
+              <TableRow
+                key={item._id}
+                className={
+                  moment(new Date()).diff(item.ldo, "days") <= 90
+                    ? "red"
+                    : "green"
+                }
+              >
                 <TableCell>{item.username} </TableCell>
                 <TableCell>{item.email} </TableCell>
                 <TableCell>{item.designation} </TableCell>
