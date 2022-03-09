@@ -49,7 +49,6 @@ function Admin() {
     cities.sort();
     let a = moment(result.data.donors[3].ldo);
     let b = moment(new Date());
-    console.log(b.diff(a, "days"));
     setCities(cities);
   }, []);
 
@@ -77,7 +76,7 @@ function Admin() {
       if (res.data.donors === null) {
         alert(res.data.msg);
       } else {
-        setData(res.data.donors);
+        setData(res.data.donors.sort((a, b) => (a.ldo > b.ldo ? 1 : -1)));
       }
     }
   };
@@ -222,7 +221,7 @@ function Admin() {
                 className={
                   moment(new Date()).diff(item.ldo, "days") <= 90
                     ? "red"
-                    : "green"
+                    : "white"
                 }
               >
                 <TableCell>{item.username} </TableCell>
