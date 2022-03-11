@@ -100,6 +100,7 @@ function Register() {
         dob,
         ldo,
       };
+
       const res = await axios.post("/api/register", newDonor);
       alert(res.data.msg);
       navigate("/");
