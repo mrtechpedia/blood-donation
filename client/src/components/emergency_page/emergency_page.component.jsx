@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import icon from "../../assets/icon.png";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Form } from "react-bootstrap";
+import emailjs from "emailjs-com";
+
+// import mongoURI from "../../../../config/"
+
 import {
   InputLabel,
   MenuItem,
@@ -47,8 +51,23 @@ function Emergency() {
       location: input.location,
     };
     const res = await axios.post("/api/emergency", newReceiver);
-    alert(res.data.msg);
-    navigate("/");
+
+    emailjs
+      .send(
+        "service_521za0r",
+        "template_epnm4cp",
+        newReceiver,
+        "Se6sj7sRx4pJBHzN3"
+      )
+      .then(
+        (response) => {
+          alert(res.data.msg);
+          navigate("/");
+        },
+        (err) => {
+          alert("FAILED...", err);
+        }
+      );
   };
 
   return (
@@ -102,6 +121,7 @@ function Emergency() {
               onChange={handleChange}
             />
           </Form.Group>
+
           <Form.Group className="mb-4">
             <FormControl required fullWidth>
               <InputLabel id="demo-simple-select-label">Blood Group</InputLabel>
