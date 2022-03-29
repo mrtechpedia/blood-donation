@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const keys = require("../config/keys");
 const e = require("express");
-const csvFilePath = "sample.csv";
+const csvFilePath = "college.csv";
 const csv = require("csvtojson");
 
 const Donor = mongoose.model("donors");

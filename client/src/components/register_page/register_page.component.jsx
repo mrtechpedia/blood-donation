@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 function Register() {
   const navigate = useNavigate();
+  const [ldoToggle, setLdoToggle] = useState(0);
   const [input, setInput] = useState({
     username: "",
     email: "",
@@ -27,6 +28,13 @@ function Register() {
     chronicDisease: "",
     bloodGroup: "",
   });
+
+  function toggleLOD(event) {
+    // if (event.target.value == 1) {
+    setLdoToggle(event.target.value);
+    console.log(ldoToggle);
+    // }
+  }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -286,7 +294,25 @@ function Register() {
             />
           </Form.Group>
           <Form.Group className="mb-4">
+            <FormControl required fullWidth>
+              <InputLabel id="demo-simple-select-label">
+                Have you ever donated the blood before?
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Blood Group"
+                onChange={toggleLOD}
+                name="bloodGroup"
+              >
+                <MenuItem value={1}>Yes</MenuItem>
+                <MenuItem value={0}>No</MenuItem>
+              </Select>
+            </FormControl>
+          </Form.Group>
+          <Form.Group className="mb-4">
             <TextField
+              disabled={!ldoToggle}
               label="Last donated on"
               required
               type="date"
