@@ -30,10 +30,7 @@ function Register() {
   });
 
   function toggleLOD(event) {
-    // if (event.target.value == 1) {
     setLdoToggle(event.target.value);
-    console.log(ldoToggle);
-    // }
   }
 
   function handleChange(event) {
@@ -70,24 +67,10 @@ function Register() {
     }
   };
 
-  const [ldo, setLdo] = useState(new Date());
+  const [ldo, setLdo] = useState("");
 
   const handleLDO = (event) => {
-    // const lastDonatedOn = new Date(event.target.value);
-
-    // // To calculate the time difference of two dates
-    // const Difference_In_Time = new Date().getTime() - lastDonatedOn.getTime();
-
-    // // To calculate the no. of days between two dates
-    // const Difference_In_Days = Math.trunc(
-    //   Difference_In_Time / (1000 * 3600 * 24)
-    // );
-
-    // if (Difference_In_Days >= 90) {
     setLdo(event.target.value);
-    // } else {
-    // setLdo(null);
-    // }
   };
 
   async function handleSubmit(event) {
